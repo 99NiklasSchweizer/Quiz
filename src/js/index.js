@@ -24,7 +24,17 @@ const alternatives = answeres => {
 
     const template = document.getElementById('template');
     template.appendChild(answere);
-    
+    const answeres = document.getElementById('answereInput');
+  });
+  const answereSend = document.getElementById('answereSend');
+  answereSend.addEventListener('click', () => {
+    const anwereInput = document.getElementsByClassName('anwereInput');
+    const inputArr = Array.from(anwereInput);
+    inputArr.forEach(item => {
+      If (answereInput.checked) {
+
+      }
+    });
   });
 };
 getData();
