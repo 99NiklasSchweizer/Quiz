@@ -3,13 +3,22 @@ import style from '../css/style.css';
 /* eslint-enable no-unused-vars */
 import password from './config';
 
+let isQuizOver = false;
+
 const sendFunction = async (option, url) => {
   if (url) {
     console.log(url);
     const response2 = await fetch(url, option);
     const json2 = await response2.json();
+    console.log({ json2 });
+    if (json2.error) {
+      console.log('ssssss');
+      const wrong = document.getElementById('Question');
+      wrong.textContent = json2.error;
+      clear();
+      return;
+    }
     if (json2.nextQuestion === null) {
-      console.log('sdfds');
       quizOver();
     } else {
       console.log('asdasdasd');
@@ -17,11 +26,12 @@ const sendFunction = async (option, url) => {
     }
   }
 };
+
 const getData = async url => {
-  if (url) {
+  if (url && !isQuizOver) {
     const response = await fetch(url);
     const json = await response.json();
-    console.log(json);
+    console.log({ json });
     question(json.question);
     if (json.alternatives) {
       alternatives(json.alternatives, url);
@@ -34,17 +44,19 @@ const question = question => {
   const questionDiv = document.getElementById('Question');
   questionDiv.textContent = question;
 };
-const quizOver = () => {
+const clear = () => {
   const div = document.getElementById('template');
   while (div.firstChild) {
     div.removeChild(div.firstChild);
   }
-  function removeElement(answereSend) {
-    const removeBtn = document.getElementById('anwereSend');
-    removeBtn.parentNode.removeChild(removeBtn);
-  }
+  const answere = document.getElementById('answereSend');
+  answere.classList.add('hidden');
+};
+const quizOver = () => {
+  clear();
   const text = document.getElementById('Question');
   text.textContent = 'The Quiz is over!';
+  isQuizOver = true;
 };
 const textInput = (input, url) => {
   const div = document.getElementById('template');
@@ -72,6 +84,8 @@ const textInput = (input, url) => {
     };
     sendFunction(option, url);
   });
+  const answere = document.getElementById('answereSend');
+  answere.classList.remove('hidden');
 };
 const alternatives = (answeres, url) => {
   const div = document.getElementById('template');
@@ -114,5 +128,20 @@ const alternatives = (answeres, url) => {
       }
     });
   });
+  const answere = document.getElementById('answereSend');
+  answere.classList.remove('hidden');
 };
 getData('http://104.248.143.87:1338/question1');
+
+const restart = document.getElementById('restart');
+restart.addEventListener('click', () => {
+  getData('http://104.248.143.87:1338/question1');
+  const answere = document.getElementById('answereSend');
+  answere.classList.remove('hidden');
+  isQuizOver = false;
+});
+// function removeElement(id) {
+// const removeBtn = document.getElementById(id);
+// removeBtn.parentNode.removeChild(removeBtn);
+// }
+// removeElement('answereSend');

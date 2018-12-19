@@ -1,0 +1,26 @@
+.hidden{
+  display: none;
+}
+body{
+  background-color: #f7fcff;
+  margin: 0px;
+  padding: 5px;
+}
+#answereSend{
+  
+}
+#template{
+  padding: 20px;  
+  width: 100px; 
+  margin: 0 auto;
+}
+.titleDiv{
+ align-content: center;
+ text-align: center;
+ border-bottom: 10px solid #6d95ad;
+ border-radius: 12px;
+}
+.buttonDiv{
+  align-content: center;
+  text-align: center;
+}

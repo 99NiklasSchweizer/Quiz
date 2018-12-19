@@ -1,17 +1,21 @@
 <!doctype html>
 <html lang="en">
+    <title>Supa Quiz</title>
     <head>
         <meta charset="utf-8">
         <title></title>
     </head>
     <body>
-        <h1>Quiz</h1>
-        <H2 id="Question"></H2>
+        <div class="titleDiv">
+            <h1>Quiz</h1>
+            <H2 id="Question"></H2>
+        </div>
+        
         <template id="inputTemplate"><input type="text" id="text-input"></template>
         <template id="alternativesDiv">
             <input type="radio" name="123" id="answereInput" class="answereInput"> <p id="answereText"></p>
         </template>
         <div id="template"></div>
-        <input type="button" value="Answere" id="answereSend"> 
+        <div class="buttonDiv"><input type="button" value="Answere" id="answereSend"> <input type="button" value="Restart" id="restart"></div>
     </body>
 </html>
